@@ -1,0 +1,75 @@
+%YAML 1.2
+---
+name: Jira
+comment: "Jira post text formatting"
+file_extensions:
+  - jira
+  - md
+
+scope: source.jira
+
+contexts:
+  main:
+    # headings
+    - match: 'h1.*'
+      scope: markup.heading.1.markdown
+    - match: 'h2.*'
+      scope: markup.heading.2.markdown
+    - match: 'h3.*'
+      scope: markup.heading.3.markdown
+    - match: 'h4.*'
+      scope: markup.heading.4.markdown
+    - match: 'h5.*'
+      scope: markup.heading.5.markdown
+    - match: 'h6.*'
+      scope: markup.heading.6.markdown
+
+    # text effects
+    - match: '(^|\s)\*.*\*'
+      scope: markup.bold
+    - match: '(^|\s)\_.*\_\s'
+      scope: markup.italic
+    - match: '(^|\s)\?\?.*\?\?\s'
+      scope: markup.italic
+    - match: '(^|\s)\-.*\-\s'
+      scope: markup.deleted
+    - match: '(^|\s)\+.*\+\s'
+      scope: markup.inserted
+      # ^superscript^
+      # ~subscript~
+    - match: '(^|\s)\{\{.*\}\}\s'
+      scope: markup.raw.inline
+    - match: 'bq.*'
+      scope: markup.quote
+
+    # common icons
+    - match: '\(/\)'
+      scope: checkmark
+    - match: '\(?\)'
+      scope: question
+    - match: '\(!\)'
+      scope: warning
+    - match: '\([x,X]\)'
+      scope: error
+
+    # noformat block
+    - match: '\{(noformat, panel)\}'
+      captures:
+        1: punctuation.definition.tag.begin.html
+        2: entity.name.tag.script.html
+      push:
+        - match: '\{(noformat, panel)\}'
+          captures:
+            1: punctuation.definition.tag.begin.html
+            2: entity.name.tag.script.html
+            3: punctuation.definition.tag.end.html
+          pop: true
+        - match: '\}'
+          scope: punctuation.definition.tag.end.html
+          push:
+            - meta_content_scope: markup.raw.block
+          with_prototype:
+            - match: '\{(noformat, panel)\}'
+              pop: true
+
+

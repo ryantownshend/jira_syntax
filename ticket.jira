@@ -1,0 +1,55 @@
+h1. jira ticket syntax
+
+h2. heading 2
+h3. heading 3
+h4. heading 4
+h5. heading 5
+h6. heading 6
+
+
+h2. emojii stuffs commonly used in tickets
+
+(/) yes
+(!) warning
+(?) question
+(x) error
+(X) also error
+
+
+
+h2. text effects
+
+*strong*
+_emphasis_
+this one should not match: ru_qa_vm
+
+??citation??
+-strikethrough-
++inserted+
+^superscript^
+~subscript~
+{{monospaced}}
+bq. Some block quoted text
+
+
+
+h2. noformat blocks
+
+{noformat}block inline{noformat}
+
+{noformat}
+block text
+block line 2
+{noformat}
+
+{noformat:title=500}
+block text with a title thing
+block line 2
+{noformat}
+
+h2. panel blocks
+
+{panel}panel inline{panel}
+
+{panel:title=panel title}panel text{panel}
+
