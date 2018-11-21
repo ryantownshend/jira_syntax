@@ -32,7 +32,6 @@ this one should not match: ru_qa_vm
 bq. Some block quoted text
 
 
-
 h2. noformat blocks
 
 {noformat}block inline{noformat}
@@ -48,7 +47,6 @@ block line 2
 {noformat}
 
 
-
 h2. panel blocks
 
 {panel}panel inline{panel}
@@ -56,5 +54,21 @@ h2. panel blocks
 {panel:title=panel title}panel text{panel}
 
 
-h2. after panels
+h2. code blocks
+
+{code:title=Bar.java|borderStyle=solid}
+// Some comments here
+public String getFoo()
+{
+    return foo;
+}
+{code}
+
+
+h2. quote block
+
+{quote}
+    here is quotable
+ content to be quoted
+{quote}
 

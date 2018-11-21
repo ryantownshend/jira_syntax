@@ -51,11 +51,20 @@ contexts:
     - match: '\([x,X]\)'
       scope: error
 
-    # noformat and panel sections
-    - match: '\{(noformat|panel)(?:\:[\w\s]+\=[\w\d\s]+)?\}'
+    # noformat | panel | code sections
+    - match: '\{(noformat|panel|code)'
       push: heredoc
 
   heredoc:
     - meta_scope: string.unquoted.heredoc
     - match: '\{\1\}'
+      pop: true
+
+    # quote block
+    - match: '\{quote\}'
+      push: quoteblock
+
+  quoteblock:
+    - meta_scope: markup.quote
+    - match: '\{quote\}'
       pop: true
