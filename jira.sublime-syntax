@@ -4,7 +4,6 @@ name: Jira
 comment: "Jira post text formatting"
 file_extensions:
   - jira
-  - md
 
 scope: source.jira
 
@@ -53,10 +52,10 @@ contexts:
       scope: error
 
     # noformat and panel sections
-    - match: '\{(noformat|panel)\}'
-      push: noformat
+    - match: '\{(noformat|panel)(?:\:[\w\s]+\=[\w\d\s]+)?\}'
+      push: heredoc
 
-  noformat:
-    - meta_scope: markup.raw.block
-    - match: ^\1;
+  heredoc:
+    - meta_scope: string.unquoted.heredoc
+    - match: '\{\1\}'
       pop: true
