@@ -53,16 +53,18 @@ contexts:
 
     # noformat | panel | code sections
     - match: '\{(noformat|panel|code)'
-      push: heredoc
+      push: noformatblock
 
-  heredoc:
-    - meta_scope: string.unquoted.heredoc
-    - match: '\{\1\}'
-      pop: true
+
 
     # quote block
     - match: '\{quote\}'
       push: quoteblock
+
+  noformatblock:
+    - meta_scope: string.unquoted.heredoc
+    - match: '\{\1\}'
+      pop: true
 
   quoteblock:
     - meta_scope: markup.quote
