@@ -37,7 +37,7 @@ contexts:
       # ^superscript^
       # ~subscript~
     - match: '(^|\s)\{\{.*\}\}\s'
-      scope: markup.raw.inline
+      scope: string.unquoted
     - match: 'bq.*'
       scope: markup.quote
 
@@ -55,12 +55,15 @@ contexts:
     - match: '\{(noformat|panel|code)'
       push: noformatblock
 
-
-
     # quote block
     - match: '\{quote\}'
       push: quoteblock
 
+    # color block
+    - match: '\{(color):(\w+)'
+      push: colorblock
+
+  # push functions down here
   noformatblock:
     - meta_scope: string.unquoted.heredoc
     - match: '\{\1\}'
@@ -70,3 +73,9 @@ contexts:
     - meta_scope: markup.quote
     - match: '\{quote\}'
       pop: true
+
+  colorblock:
+    - meta_scope: meta.red
+    - match: '\{\1\}'
+      pop: true
+

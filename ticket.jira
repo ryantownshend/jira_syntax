@@ -72,3 +72,14 @@ h2. quote block
  content to be quoted
 {quote}
 
+
+h2. color block
+
+{color:red}
+    look ma, red text!
+{color}
+
+
+
+h2. next thing
+

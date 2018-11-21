@@ -1,0 +1,12 @@
+{
+    "name": "Jira Color Scheme",
+
+    "rules":
+    [
+        {
+            "name": "color.red",
+            "scope": "jira.color.red",
+            "foreground": "var(red)"
+        },
+    ]
+}
