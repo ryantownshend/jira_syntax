@@ -52,24 +52,11 @@ contexts:
     - match: '\([x,X]\)'
       scope: error
 
-    # noformat block
-    - match: '\{(noformat, panel)\}'
-      captures:
-        1: punctuation.definition.tag.begin.html
-        2: entity.name.tag.script.html
-      push:
-        - match: '\{(noformat, panel)\}'
-          captures:
-            1: punctuation.definition.tag.begin.html
-            2: entity.name.tag.script.html
-            3: punctuation.definition.tag.end.html
-          pop: true
-        - match: '\}'
-          scope: punctuation.definition.tag.end.html
-          push:
-            - meta_content_scope: markup.raw.block
-          with_prototype:
-            - match: '\{(noformat, panel)\}'
-              pop: true
+    # noformat and panel sections
+    - match: '\{(noformat|panel)\}'
+      push: noformat
 
-
+  noformat:
+    - meta_scope: markup.raw.block
+    - match: ^\1;
+      pop: true
