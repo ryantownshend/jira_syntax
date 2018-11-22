@@ -9,6 +9,33 @@ scope: source.jira
 
 contexts:
   main:
+
+    # text effects
+    - match: '(^|\s)\*.*\*'
+      scope: markup.bold
+    - match: '(^|\s)\_.*\_\s'
+      scope: markup.italic
+    - match: '(^|\s)\?\?.*\?\?\s'
+      scope: markup.italic
+    - match: '(^|\s)\-.*\-\s'
+      scope: markup.deleted
+    - match: '(^|\s)\+.*\+\s'
+      scope: markup.inserted
+    ## ^superscript^
+    ## ~subscript~
+    - match: '(^|\s)\{\{.*\}\}\s'
+      scope: string.unquoted
+    - match: 'bq.*'
+      scope: markup.quote
+
+    ## quote block
+    - match: '\{quote\}'
+      push: quoteblock
+
+    ## color block
+    - match: '\{(color):(\w+)'
+      push: colorblock
+
     # headings
     - match: 'h1.*'
       scope: markup.heading.1.markdown
@@ -23,25 +50,27 @@ contexts:
     - match: 'h6.*'
       scope: markup.heading.6.markdown
 
-    # text effects
-    - match: '(^|\s)\*.*\*'
-      scope: markup.bold
-    - match: '(^|\s)\_.*\_\s'
-      scope: markup.italic
-    - match: '(^|\s)\?\?.*\?\?\s'
-      scope: markup.italic
-    - match: '(^|\s)\-.*\-\s'
-      scope: markup.deleted
-    - match: '(^|\s)\+.*\+\s'
-      scope: markup.inserted
-      # ^superscript^
-      # ~subscript~
-    - match: '(^|\s)\{\{.*\}\}\s'
-      scope: string.unquoted
-    - match: 'bq.*'
-      scope: markup.quote
+    # headings
 
-    # common icons
+    # text breaks
+
+    # links
+
+    # lists
+
+    # images
+
+    # attachments
+
+    # tables
+
+    # advanced formattings
+    ## noformat | panel | code sections
+    - match: '\{(noformat|panel|code)'
+      push: noformatblock
+
+    # misc
+    ## common icons
     - match: '\(/\)'
       scope: checkmark
     - match: '\(?\)'
@@ -50,18 +79,6 @@ contexts:
       scope: warning
     - match: '\([x,X]\)'
       scope: error
-
-    # noformat | panel | code sections
-    - match: '\{(noformat|panel|code)'
-      push: noformatblock
-
-    # quote block
-    - match: '\{quote\}'
-      push: quoteblock
-
-    # color block
-    - match: '\{(color):(\w+)'
-      push: colorblock
 
   # push functions down here
   noformatblock:
@@ -78,4 +95,3 @@ contexts:
     - meta_scope: meta.red
     - match: '\{\1\}'
       pop: true
-
